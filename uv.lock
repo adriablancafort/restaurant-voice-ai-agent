@@ -1525,6 +1525,20 @@ webrtc = [
 ]
 
 [[package]]
+name = "pipecat-ai-flows"
+version = "0.0.22"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "docstring-parser" },
+    { name = "loguru" },
+    { name = "pipecat-ai" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/ea/df/cc5258bd04c9347436673839ec3d9b858d95b0bb74ede23c97a6608f750d/pipecat_ai_flows-0.0.22.tar.gz", hash = "sha256:5cb3e6972760eb9d2068ff29eda9813b4d406fcf6c34bdc1ebf87e93e954ce30", size = 5510244, upload-time = "2025-11-18T15:12:00.841Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/25/6d/b49bec4e304534cb61a9a563d82dfda9aebb49f45dd972f6f6a0bb1213f7/pipecat_ai_flows-0.0.22-py3-none-any.whl", hash = "sha256:68e0e239b29978bdeacf4af2259e8c4b8f7687045ce228450dd8945dac6c5c70", size = 30975, upload-time = "2025-11-18T15:11:59.068Z" },
+]
+
+[[package]]
 name = "pipecat-ai-small-webrtc-prebuilt"
 version = "2.0.4"
 source = { registry = "https://pypi.org/simple" }
@@ -2399,12 +2413,14 @@ version = "0.1.0"
 source = { virtual = "." }
 dependencies = [
     { name = "pipecat-ai", extra = ["cartesia", "deepgram", "local-smart-turn-v3", "openai", "runner", "silero", "webrtc"] },
+    { name = "pipecat-ai-flows" },
     { name = "python-dotenv" },
 ]
 
 [package.metadata]
 requires-dist = [
     { name = "pipecat-ai", extras = ["cartesia", "deepgram", "local-smart-turn-v3", "openai", "runner", "silero", "webrtc"], specifier = ">=0.0.98" },
+    { name = "pipecat-ai-flows", specifier = ">=0.0.22" },
     { name = "python-dotenv", specifier = ">=1.2.1" },
 ]
 
