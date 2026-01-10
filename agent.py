@@ -27,7 +27,7 @@ async def agent(transport: BaseTransport, runner_args: RunnerArguments):
 
     tts = CartesiaTTSService(
         api_key=os.getenv("CARTESIA_API_KEY"),
-        voice_id="6f84f4b8-58a2-430c-8c79-688dad597532",
+        voice_id="f9836c6e-a0bd-460e-9d3c-f7299fa60f94",
         model="sonic-2",
         params=CartesiaTTSService.InputParams(
             speed="fast"
