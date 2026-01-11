@@ -15,6 +15,7 @@ from pipecat.services.cartesia.tts import CartesiaTTSService
 from pipecat.services.deepgram.stt import DeepgramSTTService
 from pipecat.services.openai.llm import OpenAILLMService
 from pipecat.transports.base_transport import BaseTransport, TransportParams
+from pipecat.transports.websocket.fastapi import FastAPIWebsocketParams
 from pipecat_flows import FlowManager
 
 from restaurant_reservation_flow import create_initial_node
@@ -57,9 +58,15 @@ async def agent(transport: BaseTransport, runner_args: RunnerArguments):
         ]
     )
 
+    is_twilio = runner_args.transport == "twilio"
+    audio_sample_rate = 8000 if is_twilio else 16000
+
     task = PipelineTask(
         pipeline,
-        params=PipelineParams(),
+        params=PipelineParams(
+            audio_in_sample_rate=audio_sample_rate,
+            audio_out_sample_rate=audio_sample_rate,
+        ),
         observers=[RTVIObserver(rtvi)],
     )
 
@@ -90,6 +97,11 @@ async def bot(runner_args: RunnerArguments):
             audio_out_enabled=True,
             vad_analyzer=SileroVADAnalyzer(params=VADParams(stop_secs=0.2)),
             turn_analyzer=LocalSmartTurnAnalyzerV3(),
+        ),
+        "twilio": lambda: FastAPIWebsocketParams(
+            audio_in_enabled=True,
+            audio_out_enabled=True,
+            vad_analyzer=SileroVADAnalyzer(params=VADParams(stop_secs=0.2)),
         ),
     }
 
