@@ -17,7 +17,7 @@ from pipecat.services.openai.llm import OpenAILLMService
 from pipecat.transports.base_transport import BaseTransport, TransportParams
 from pipecat_flows import FlowManager
 
-from restaurant_reservation_flow import create_initial_node
+from flow.start_conversation import create_start_conversation_node
 
 load_dotenv(override=True)
 
@@ -72,7 +72,7 @@ async def agent(transport: BaseTransport, runner_args: RunnerArguments):
 
     @transport.event_handler("on_client_connected")
     async def on_client_connected(transport, client):
-        await flow_manager.initialize(create_initial_node())
+        await flow_manager.initialize(create_start_conversation_node())
 
     @transport.event_handler("on_client_disconnected")
     async def on_client_disconnected(transport, client):
